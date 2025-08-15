@@ -1,0 +1,56 @@
+
+expenses = []  # List to store all expenses
+categories = {"Food", "Transport", "Shopping", "Utilities", "Entertainment"}  
+daily_limit = 1000  # Daily spending limit
+
+def add_expense():
+    try:
+        amount = float(input("Enter Expense Amount: "))
+    except ValueError:
+        print("❌ Invalid amount. Please enter a number.")
+        return  # safely exits the function
+
+    category = input(f"Enter Category {categories}: ")
+    if category not in categories:
+        print("❌ Invalid category.")
+        return
+
+    expense = {"amount": amount, "category": category}
+    expenses.append(expense)
+    print("✅ Expense added successfully!")
+
+def view_summary():
+    if not expenses:
+        print(" No expenses recorded yet.")
+        return
+    
+    print("- All Expenses -")
+    total = 0
+    for exp in expenses:
+        print(f"{exp['category']}: {exp['amount']}")
+        total += exp['amount']
+    
+    print(f"💰 Total spent: {total}")
+    if total > daily_limit:
+        print("⚠️ Warning: You exceeded your daily limit!")
+
+def main():
+    while True:
+        print("-- Expense Tracker Menu --")
+        print("1. Add Expense")
+        print("2. view summary")
+        print("3. Exit")
+
+        choice = input("Choose an option: ")
+
+        if choice == "1":
+            add_expense()
+        elif choice == "2":
+            view_summary()
+        elif choice == "3":
+            print("👋 Exiting... Goodbye!")
+            break
+        else:
+            print("❌ Invalid choice, try again.")
+
+main()
