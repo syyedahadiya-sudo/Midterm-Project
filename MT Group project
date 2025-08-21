@@ -7,13 +7,24 @@ daily_limit = 1000  # Daily spending limit
 def add_expense():
     print("Enter Expense Amount: ")
 
+def add_expense():
+    try:
+        amount = float(input("Enter Expense Amount: "))  # Taking user input for amount
+        if amount <= 0:
+            print("Amount must be greater than zero. Please try again.")
+            return  # Exit the function if the amount is invalid
 
+        category = input("Enter Category: ").capitalize()
 
-
-
-
-
-
+        if category in categories:
+            expense = {"amount": amount, "category": category}
+            expenses.append(expense)
+            print("Expense added successfully!")
+        else:
+            print("Invalid category. Please choose from:", ", ".join(categories))
+    
+    except ValueError:
+        print("Invalid input! Please enter a valid number for the amount.")
 
     amount = float(input())  # Taking user input for amount
 
